@@ -138,27 +138,38 @@
             clearInterval(targetMover);
             document.removeEventListener('keydown', keyDownListener);  // 7秒後に止まる
 
-            const charCenterX = posX + 50;
-            const charCenterY = posY + 50;
-            const targetCenterX = targetPosX + 150;
-            const targetCenterY = targetPosY + 100;
 
-            const distance = Math.sqrt(Math.pow(targetCenterX - charCenterX, 2) + Math.pow(targetCenterY - charCenterY, 2));
-            if (distance > 90) {
-                // message.textContent = `中心間の距離が${distance.toFixed(2)}pxずれました。残念！`;
+            const charStyle = window.getComputedStyle(char);
+            const targetStyle = window.getComputedStyle(target);
+
+            const charCenterX = parseFloat(charStyle.left) + 50;
+            const charCenterY = parseFloat(charStyle.top) + 50;
+            const targetCenterX = parseFloat(targetStyle.left);
+            const targetCenterY = parseFloat(targetStyle.top);
+
+            const xDistance = Math.abs(targetCenterX - charCenterX);
+            const yDistance = Math.abs(targetCenterY - charCenterY);
+
+            if (xDistance > 100 || yDistance > 49) {
                 message.textContent = `残念！日本国旗は作れませんでした！`;
+                // message.textContent = `中心のX座標が${xDistance.toFixed(2)}px、Y座標が${yDistance.toFixed(2)}pxずれました。残念！`;
             } else {
-                // message.textContent = `中心間の距離が${distance.toFixed(2)}pxずれました。成功です！`;
-                message.textContent = `成功です！日本国万歳！`;
+                // message.textContent = `中心のX座標が${xDistance.toFixed(2)}px、Y座標が${yDistance.toFixed(2)}pxずれました。成功です！`;
+                `成功です！日本国万歳！`;
             }
+
+            console.log(charCenterX)
+            console.log(charCenterY)
+            console.log(targetCenterX)
+            console.log(targetCenterY)
 
             message.style.display = 'block';
 
             setTimeout(() => {
-                if (distance <= 50) {
-                    window.location.href = 'clear_result.html';
-                } else {
+                if (xDistance > 100 || yDistance > 49) {
                     window.location.href = 'game_over_result.html';
+                } else {
+                    window.location.href = 'clear_result.html';
                 }
             }, 5000); //n秒後にページ遷移
         }, 7000);
