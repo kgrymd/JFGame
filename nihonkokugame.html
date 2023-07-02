@@ -165,13 +165,13 @@
 
             message.style.display = 'block';
 
-            // setTimeout(() => {
-            //     if (xDistance > 100 || yDistance > 49) {
-            //         window.location.href = 'game_over_result.html';
-            //     } else {
-            //         window.location.href = 'clear_result.html';
-            //     }
-            // }, 5000); //n秒後にページ遷移
+            setTimeout(() => {
+                if (xDistance > 100 || yDistance > 49) {
+                    window.location.href = 'game_over_result.html';
+                } else {
+                    window.location.href = 'clear_result.html';
+                }
+            }, 5000); //n秒後にページ遷移
         }, 7000);
     </script>
 </body>
