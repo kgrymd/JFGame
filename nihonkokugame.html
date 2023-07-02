@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>ゲーム画面</title>
+    <style>
+        #char {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        #target {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 200px;
+            background-color: white;
+            z-index: 0;
+            border: 2px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #inner-circle {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            /* border: 1px solid black; */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+        }
+
+        #message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            font-size: 24px;
+            color: black;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="char"></div>
+    <div id="target">
+        <div id="inner-circle"></div>
+    </div>
+    <div id="message"></div>
+
+    <audio id="audio" src="audio/yugio2.mp3" autoplay></audio>
+
+    <script>
+        const char = document.getElementById('char');
+        const target = document.getElementById('target');
+        const message = document.getElementById('message');
+
+        let posX = 100;
+        let posY = 100;
+
+        let targetPosX = Math.floor(Math.random() * (window.innerWidth - 150));
+        let targetPosY = Math.floor(Math.random() * (window.innerHeight - 75));
+
+        target.style.left = targetPosX + 'px';
+        target.style.top = targetPosY + 'px';
+
+        function moveChar(direction) {
+            if (direction === 'up') {
+                posY -= 10;
+            } else if (direction === 'down') {
+                posY += 10;
+            } else if (direction === 'left') {
+                posX -= 10;
+            } else if (direction === 'right') {
+                posX += 10;
+            }
+
+            char.style.top = posY + 'px';
+            char.style.left = posX + 'px';
+        }
+
+        function moveTarget() {
+            const direction = Math.floor(Math.random() * 4);
+            let newTargetPosX = targetPosX;
+            let newTargetPosY = targetPosY;
+            if (direction === 0) {
+                newTargetPosY -= 200;
+            } else if (direction === 1) {
+                newTargetPosY += 200;
+            } else if (direction === 2) {
+                newTargetPosX -= 200;
+            } else if (direction === 3) {
+                newTargetPosX += 200;
+            }
+
+            if (newTargetPosX >= 0 && newTargetPosX <= window.innerWidth - 300 && newTargetPosY >= 0 && newTargetPosY <= window.innerHeight - 200) {
+                targetPosX = newTargetPosX;
+                targetPosY = newTargetPosY;
+                target.style.left = targetPosX + 'px';
+                target.style.top = targetPosY + 'px';
+            }
+        }
+
+        const targetMover = setInterval(moveTarget, 100);
+
+        const keyDownListener = function (event) {
+            if (event.keyCode === 38) {
+                // up arrow key
+                moveChar('up');
+            } else if (event.keyCode === 40) {
+                // down arrow key
+                moveChar('down');
+            } else if (event.keyCode === 37) {
+                // left arrow key
+                moveChar('left');
+            } else if (event.keyCode === 39) {
+                // right arrow key
+                moveChar('right');
+            }
+        };
+
+        document.addEventListener('keydown', keyDownListener);
+
+        setTimeout(() => {
+            clearInterval(targetMover);
+            document.removeEventListener('keydown', keyDownListener);  // 7秒後に止まる
+
+            const charCenterX = posX + 50;
+            const charCenterY = posY + 50;
+            const targetCenterX = targetPosX + 150;
+            const targetCenterY = targetPosY + 100;
+
+            const distance = Math.sqrt(Math.pow(targetCenterX - charCenterX, 2) + Math.pow(targetCenterY - charCenterY, 2));
+            if (distance > 90) {
+                // message.textContent = `中心間の距離が${distance.toFixed(2)}pxずれました。残念！`;
+                message.textContent = `残念！日本国旗は作れませんでした！`;
+            } else {
+                // message.textContent = `中心間の距離が${distance.toFixed(2)}pxずれました。成功です！`;
+                message.textContent = `成功です！日本国万歳！`;
+            }
+
+            message.style.display = 'block';
+
+            setTimeout(() => {
+                if (distance <= 50) {
+                    window.location.href = 'clear_result.html';
+                } else {
+                    window.location.href = 'game_over_result.html';
+                }
+            }, 5000); //n秒後にページ遷移
+        }, 7000);
+    </script>
+</body>
+
+</html>
