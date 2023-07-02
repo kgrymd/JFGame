@@ -79,13 +79,13 @@
 
         function moveChar(direction) {
             if (direction === 'up') {
-                posY -= 10;
+                posY -= 100;
             } else if (direction === 'down') {
-                posY += 10;
+                posY += 100;
             } else if (direction === 'left') {
-                posX -= 10;
+                posX -= 100;
             } else if (direction === 'right') {
-                posX += 10;
+                posX += 100;
             }
 
             char.style.top = posY + 'px';
@@ -97,13 +97,13 @@
             let newTargetPosX = targetPosX;
             let newTargetPosY = targetPosY;
             if (direction === 0) {
-                newTargetPosY -= 200;
+                newTargetPosY -= 100;
             } else if (direction === 1) {
-                newTargetPosY += 200;
+                newTargetPosY += 100;
             } else if (direction === 2) {
-                newTargetPosX -= 200;
+                newTargetPosX -= 100;
             } else if (direction === 3) {
-                newTargetPosX += 200;
+                newTargetPosX += 100;
             }
 
             if (newTargetPosX >= 0 && newTargetPosX <= window.innerWidth - 300 && newTargetPosY >= 0 && newTargetPosY <= window.innerHeight - 200) {
@@ -165,13 +165,13 @@
 
             message.style.display = 'block';
 
-            setTimeout(() => {
-                if (xDistance > 100 || yDistance > 49) {
-                    window.location.href = 'game_over_result.html';
-                } else {
-                    window.location.href = 'clear_result.html';
-                }
-            }, 5000); //n秒後にページ遷移
+            // setTimeout(() => {
+            //     if (xDistance > 100 || yDistance > 49) {
+            //         window.location.href = 'game_over_result.html';
+            //     } else {
+            //         window.location.href = 'clear_result.html';
+            //     }
+            // }, 5000); //n秒後にページ遷移
         }, 7000);
     </script>
 </body>
