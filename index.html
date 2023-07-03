@@ -1,79 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>ゲームスタート画面</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
-        body {
-            text-align: center;
-            padding-top: 100px;
-            font-family: Arial, sans-serif;
-            position: relative;
-        }
-
-        .background-image {
-            size: contain;
-            position: absolute;
-            top: 0;
-            left: 0;
+        img {
             width: 100%;
-            height: 100%;
-            z-index: -1;
         }
-
-        h1 {
-            font-size: 50px;
-            color: #333;
-        }
-
-        h2 {
-            font-size: 20px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ff5500;
-            color: #fff;
-            text-decoration: none;
-            font-size: 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #ff3300;
-        }
-
-        li {
-            list-style-type: none;
-        }
-
-        /* ↑やらずにあえてJS選手権時点のまま残しとく方が良い？ */
     </style>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                window.location.href = "index2.html";
+            }, 25000);
+        }
+    </script>
 </head>
 
 <body>
-
-    <audio id="audio" src="audio/yugio1.mp3" autoplay></audio>
-    <div class="background-image">
-        <img src="https://i.pinimg.com/originals/2c/03/e1/2c03e1a16db8981961b2d455524605e7.gif" alt="背景イメージ">
-    </div>
-
-    <h1>日本国ゲーム</h1>
-
-    <h2>ルール説明</h2>
-
-    <h3>このゲームは日本の国旗を作るゲームです</h3>
-
-    <ol>
-        <li>ランダムに出現し動き回るターゲットの中に赤い円を入れ日本国旗を作ろう</li>
-        <li>７秒後にターゲットの中に赤い円が入っている状態にせよ！</li>
-        <li>見事国旗を作れれば課題作成完了だ！</li>
-    </ol>
-
-    <a href="nihonkokugame.html" class="button">ゲームスタート</a>
-
+    <audio id="audio" src="audio/jonouchi.mp3" autoplay></audio>
+    <img src="img/deploy scene1.png" alt="">
 </body>
 
 </html>
