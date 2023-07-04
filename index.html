@@ -11,17 +11,32 @@
             width: 100%;
         }
     </style>
-    <script>
+    <!-- <script>
         window.onload = function () {
             setTimeout(function () {
                 window.location.href = "index2.html";
             }, 25000);
         }
+    </script> -->
+
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                window.location.href = "index2.html";
+            }, 25000);
+
+            setTimeout(function () {
+                var audio = document.getElementById('audio');
+                audio.play();
+            }, 2000);
+        }
     </script>
+
+
 </head>
 
 <body>
-    <audio id="audio" src="audio/jonouchi.mp3" autoplay></audio>
+    <audio id="audio" src="audio/jonouchi.mp3"></audio>
     <img src="img/deploy scene1.png" alt="">
 </body>
 
